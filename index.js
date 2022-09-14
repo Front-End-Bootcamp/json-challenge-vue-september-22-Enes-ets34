@@ -211,24 +211,41 @@ const members = [
 	},
 ];
 
-let findAssistant = (group) => {
+let findAssistant = (group) => {	//Asistanları bulacağımız fonksiyon
 	return members
-		.filter((i) => i.type === "assistant")
-		.find((i) => i.group === group);
+		.filter((i) => i.type === "assistant") //Tüm Asistanları Filtreliyoruz.
+		.find((i) => i.group === group); // Filtrelenmiş asistanlar arasında ilgili grup adına (group parametresine göre) sahip asistanı buluyoruz.
 };
-let getStudentsByGroup = (group) => {
+let getStudentsByGroup = (group) => { // Öğrencileri bulacağımız fonksiyon.
 	return members
-		.filter((i) => i.type !== "assistant" && i.group === group)
-		.map((i) => i.name);
+		.filter((i) => i.type !== "assistant" && i.group === group) //Öğrencileri group parametresine göre filtreliyoruz
+		.map((i) => i.name); // Filtrelenmiş öğrencilerimizi istenen formata göre yani sadece adlarına göre alıyoruz. 
 };
-function getMembersByGroup(group) {
-	let assistant = findAssistant(group);
-	let students = getStudentsByGroup(group);
+function getMembersByGroup(group) { // Öğrenciler ve asistanın yer alacağı fonksiyon
+	let assistant = findAssistant(group); // Yukarıda asistan bulma fonksiyonumuzu kullanarak assistant adlı değişken oluşturuyoruz.
+	let students = getStudentsByGroup(group);// Yukarıda öğrenci bulma fonksiyonumuzu kullanarak students adlı değişken oluşturuyoruz.
 
-	return {
+	return { //İstenen formatta bir obje döndürüyoruz.
 		group: group,
 		students: students,
 		assistant: assistant.name,
 	};
 }
 console.log(getMembersByGroup("SteelBlue"));
+//Örnek çıktı 
+{
+// 	group: 'SteelBlue',
+// 	students: [
+// 	  'Abdullah Kuş',
+// 	  'Alihan Değirmenciler',
+// 	  'Anıl Sezer',
+// 	  'Aybüke Polat',
+// 	  'Fatih Tarım',
+// 	  'Fatih Tufan',
+// 	  'Feruze Beyza Başer',
+// 	  'İlker Durmaz',
+// 	  'Mehmet Kırsakal',
+// 	  'Yunus Emre Topçu'
+// 	],
+// 	assistant: 'Enes Taha Sarı'
+//   }
